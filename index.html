@@ -21,23 +21,43 @@ let config = {
 
 let game = new Phaser.Game(config);
 
-let rect;
+/*let rect;*/
 
 let flechas;
 
+let huevera_b, huevera_m, huevera_d;
+
+let huevo_b, huevo_m, huevo_d;
+
 function precarga ()
 {
-
+this.load.image('huevera', 'imgs/huevera.png');
+this.load.image('huevo', 'imgs/huevoRealista.png');
 }
 
 function crea ()
 {
-	rect = this.add.rectangle(400, 225, 32, 32, 0xffffff);
+/*rect = this.add.rectangle(400, 225, 32, 32, 0xffffff);*/
 
-	flechas = this.input.keyboard.createCursorKeys();
+//flechas = this.input.keyboard.createCursorKeys();
+
+	let marron = Phaser.Display.Color.GetColor(192,128,16);
+
+	huevera_m = this.add.image(400, 160, 'huevera');
+	huevera_m.setScale(.5);
+	huevera_m.setTint(marron)
+
+	huevo_m = this.add.image(400,256, 'huevo');
+	huevo_m.setScale(.5);
+	huevo_m.setTint(marron)
 }
 
-function actualiza ()
+function actualiza()
+{
+
+}
+
+function actualiza_rect()
 {
 
 	if (flechas.left.isDown){
@@ -55,10 +75,7 @@ function actualiza ()
 
 	rect.x = Phaser.Math.Clamp(rect.x, rect.width / 2, canvas_w - rect.width / 2);
 	rect.y = Phaser.Math.Clamp(rect.y, rect.height / 2, canvas_h - rect.height / 2);
-
 }
-
-
         </script>
     </head>
     <body>
