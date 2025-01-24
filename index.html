@@ -1,41 +1,67 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>Hueveras de cartón 2</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.87.0/phaser.min.js"></script>
-		<script>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hueveras de carton 2</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.87.0/phaser.min.js"></script>
+        <script>
+
 let canvas_w = 800;
 let canvas_h = 450;
+
 let config = {
-width: canvas_w,
-heigth: canvas_h,
-scene: {
-	preload: precarga,
-	create: crea,
-	update: actualiza
-	}
-};	
+    width: canvas_w,
+    height: canvas_h,
+		scene: {
+			preload: precarga,
+			create: crea,
+			update: actualiza
+		}
+};
+
 let game = new Phaser.Game(config);
+
 let rect;
-let rect_dir=1;
-function precarga()
+
+let flechas;
+
+function precarga ()
 {
 
 }
-function crea()
+
+function crea ()
 {
 	rect = this.add.rectangle(400, 225, 32, 32, 0xffffff);
+
+	flechas = this.input.keyboard.createCursorKeys();
 }
-function actualiza()
+
+function actualiza ()
 {
-	rect.x += rect_dir;
-	if (rect.x <= 0 || rect.x >= canvas_w){
-	rect_dir = -rect_dir;
+
+	if (flechas.left.isDown){
+		rect.x -= 5;
 	}
+	if (flechas.right.isDown) {
+		rect.x += 5;
+	}
+	if (flechas.up.isDown) {
+		rect.y -= 5;
+	}
+	if (flechas.down.isDown) {
+		rect.y += 5;
+	}
+
+	rect.x = Phaser.Math.Clamp(rect.x, rect.width / 2, canvas_w - rect.width / 2);
+	rect.y = Phaser.Math.Clamp(rect.y, rect.height / 2, canvas_h - rect.height / 2);
+
 }
-		</script>
-	</head>
-	<body>
-	</body>
+
+
+        </script>
+    </head>
+    <body>
+
+    </body>
 </html>
